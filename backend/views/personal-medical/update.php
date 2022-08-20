@@ -3,10 +3,10 @@
 /* @var $this yii\web\View */
 /* @var $model backend\models\PersonalMedical */
 
-$this->title = 'Actualizeaza Personal Medical: ' . $model->numeComplet;
+$this->title =( $model->scenario=='profile'?'Vizualizeaza Profil: ':'Actualizeaza Personal Medical: ') . $model->numeComplet;
 $this->params['breadcrumbs'][] = ['label' => 'Personal Medical', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->numeComplet, 'url' => ['view', 'id' => $model->numeComplet]];
-$this->params['breadcrumbs'][] = 'Actualizare';
+$this->params['breadcrumbs'][] =  $model->scenario=='profile'?'Vizualizare Profil':'Actualizare';
 ?>
 
 <div class="container-fluid">

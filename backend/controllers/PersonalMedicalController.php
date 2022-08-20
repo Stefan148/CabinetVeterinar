@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\ForbiddenHttpException;
 
 /**
  * PersonalMedicalController implements the CRUD actions for PersonalMedical model.
@@ -82,9 +83,15 @@ class PersonalMedicalController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id,$cmd=NULL)
     {
         $model = $this->findModel($id);
+        if(!is_null($cmd)&& $cmd=='profile'&&Yii::$app->user->id==$id){
+            $model->scenario=$cmd;
+        }
+        else if(!is_null($cmd)&& $cmd=='profile'&&Yii::$app->user->id!=$id){
+            throw new ForbiddenHttpException('All hacking attempts are logged');
+        }
         if(!is_null($model->user0)){
             $model->email=$model->user0->email;
         }

@@ -45,6 +45,7 @@ class PersonalMedical extends \yii\db\ActiveRecord
         return [
             [['nume', 'prenume', 'poza', 'tip', 'cod_parafa', 'telefon', 'email'], 'required'],
             [['gen', 'tip', 'user'], 'integer'],
+            
 
             [['nume', 'prenume'], 'string', 'max' => 50],
             [['poza'], 'string', 'max' => 80],

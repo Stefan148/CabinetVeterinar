@@ -84,7 +84,7 @@ $this->registerCss($style);
     <div class="row">
     
         <div class="col-3">
-            <?= $form->field($model, 'tip')->dropDownList(ArrayHelper::map(TipPersonalMedical::find()->all(), 'id', 'denumire'), ['prompt' => '--Selectati tipul--']) ?>
+            <?= $form->field($model, 'tip')->dropDownList(ArrayHelper::map(TipPersonalMedical::find()->all(), 'id', 'denumire'), ($model->scenario == 'profile') ?   ['disabled'=>'disabled','prompt' => '--Selectati tipul--'] :['prompt' => '--Selectati tipul--']) ?>
         </div>
         <div class="col-3">
             <?= $form->field($model, 'nume')->textInput(['maxlength' => true]) ?>
@@ -102,19 +102,20 @@ $this->registerCss($style);
 
     <div class="row">
         <div class="col-3">
-            <?= $form->field($model, 'gen')->widget(SwitchInput::classname(), [
-                'pluginOptions' => [
+             <?= $form->field($model, 'gen')->widget(SwitchInput::classname(),[
+                'pluginOptions' => [ 
                     //'handleWidth'=>60,
                     'onText' => 'Masculin',
                     'offText' => 'Feminin'
-                ]
+                ],
+                'disabled'=>$model->scenario=='profile'
             ]); ?>
         </div>
         <div class="col-3">
             <?= $form->field($model, 'telefon')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-3">
-                <?= $form->field($model, 'cod_parafa')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'cod_parafa')->textInput(($model->scenario == 'profile') ?   ['readOnly'=>'readOnly','maxlength' => true] :['maxlength' => true]) ?>
             </div>
             
         <div class="col-3 text-center">
